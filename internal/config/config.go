@@ -23,10 +23,20 @@ func NewConfig() *Config {
 		log.Fatal("Error loading .env file")
 	}
 
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5000"
+	}
+
+	appEnv := os.Getenv("APP_ENV")
+	if appEnv == "" {
+		appEnv = "development"
+	}
+
 	return &Config{
-		Port:         os.Getenv("PORT"),
+		Port:         port,
 		Version:      os.Getenv("APP_VERSION"),
-		AppEnv:       os.Getenv("APP_ENV"),
+		AppEnv:       appEnv,
 		ReadTimeout:  15 * time.Second,
 		WriteTImeout: 15 * time.Second,
 		IdleTimeout:  60 * time.Second,
