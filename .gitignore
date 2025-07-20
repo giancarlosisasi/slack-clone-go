@@ -166,6 +166,8 @@ out/
 *.swo
 *~
 
+tmp/
+
 # OS generated files
 .DS_Store
 .DS_Store?
@@ -197,3 +199,24 @@ logs
 # Backup files
 *.bak
 *.backup 
+
+postgres-data/
+
+# frontend
+
+# Local
+.DS_Store
+*.local
+*.log*
+
+# Dist
+node_modules
+dist/
+
+# Profile
+.rspack-profile-*/
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea

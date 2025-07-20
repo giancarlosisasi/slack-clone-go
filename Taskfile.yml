@@ -1,0 +1,28 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  dev:a:
+    cmds:
+      - air
+    silent: false
+  dev:f:
+    cmds:
+      - pnpm css:dev & pnpm js:dev
+
+  f:check:
+    cmds:
+      - pnpm check
+  f:format:
+    cmds:
+      - pnpm format
+  f:build:
+    cmds:
+      - pnpm build
+  f:preview:
+    cmds:
+      - pnpm preview
