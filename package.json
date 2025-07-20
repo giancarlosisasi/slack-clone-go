@@ -7,7 +7,7 @@
     "build": "pnpm css:build && rsbuild build",
     "check": "biome check --write",
     "format": "biome format --write",
-    "js:dev": "rsbuild dev --open",
+    "js:dev": "rsbuild dev --open --env-mode frontend",
     "css": "tailwindcss -i ./frontend/src/global.css -o ./frontend/src/global.min.css",
     "css:dev": "pnpm css --watch",
     "css:build": "pnpm css --minify",

@@ -2,11 +2,8 @@
 
 version: '3'
 
-vars:
-  GREETING: Hello, World!
-
 tasks:
-  dev:a:
+  dev:b:
     cmds:
       - air
     silent: false
