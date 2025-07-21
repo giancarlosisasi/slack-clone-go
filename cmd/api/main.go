@@ -13,6 +13,8 @@ func main() {
 		log.Fatalf("Failed to create application: %v", err)
 	}
 
+	defer application.DB.Close()
+
 	routesHandler := routes.SetupRoutes(application)
 
 	// Start the server with graceful shutdown

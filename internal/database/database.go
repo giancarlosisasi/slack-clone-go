@@ -17,7 +17,8 @@ func New(logger *log.Logger) (*pgxpool.Pool, error) {
 		return nil, err
 	}
 
-	pgxConfig.MaxConns = 2
+	pgxConfig.MaxConns = 30
+	pgxConfig.MinConns = 5
 	pgxConfig.MaxConnIdleTime = time.Minute * 15
 
 	if dbUrl == "" {
@@ -28,7 +29,6 @@ func New(logger *log.Logger) (*pgxpool.Pool, error) {
 		logger.Printf("Unable to create connection pool: %v\n", err)
 		os.Exit(1)
 	}
-	defer dbpool.Close()
 
 	err = dbpool.Ping(context.Background())
 	if err != nil {

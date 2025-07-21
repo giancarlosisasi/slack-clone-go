@@ -31,7 +31,7 @@ tasks:
 
   sqlc:generate:
     cmds:
-      - sqlc generate
+      - go tool sqlc generate
 
   dev:b:
     cmds:

@@ -6,6 +6,10 @@ import (
 
 	logger "github.com/giancarlosisasi/slack-clone-go/internal"
 	"github.com/giancarlosisasi/slack-clone-go/internal/database"
+	sqlcDatabase "github.com/giancarlosisasi/slack-clone-go/internal/database/generated"
+	"github.com/giancarlosisasi/slack-clone-go/internal/repositories"
+	"github.com/giancarlosisasi/slack-clone-go/internal/services"
+	"github.com/giancarlosisasi/slack-clone-go/internal/stores"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
@@ -15,7 +19,7 @@ type Application struct {
 	DB     *pgxpool.Pool
 	WG     sync.WaitGroup
 	// services
-	// UserService *services.UserService
+	UserService *services.UserService
 }
 
 func NewApplication() (*Application, error) {
@@ -27,11 +31,17 @@ func NewApplication() (*Application, error) {
 		return nil, err
 	}
 
+	// sqlc queries
+	queries := sqlcDatabase.New(db)
+
 	// stores
-	// userStore := store.NewPostgresUserStore(db)
+	userStore := stores.NewUserStore(queries)
+
+	// repository
+	userRepository := repositories.NewUserRepository(userStore)
 
 	// services
-	// userService := services.NewUserService(userStore)
+	userService := services.NewUserService(userRepository, logger)
 
 	return &Application{
 		Logger: logger,
@@ -39,7 +49,7 @@ func NewApplication() (*Application, error) {
 		DB:     db,
 		WG:     sync.WaitGroup{},
 		// services
-		// UserService: userService
+		UserService: userService,
 	}, nil
 
 }
