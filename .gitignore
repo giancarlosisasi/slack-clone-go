@@ -200,7 +200,7 @@ logs
 *.bak
 *.backup 
 
-postgres-data/
+postgres_data/
 
 # frontend
 

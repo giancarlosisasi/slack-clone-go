@@ -12,19 +12,22 @@ tasks:
 
   db:migrate:create:
     cmds:
-      - migrate create -ext sql -dir database/migrations -seq {{.name}}
+      - migrate create -ext sql -dir internal/database/migrations -seq {{.name}}
   db:migrate:up:
     cmds:
-      - migrate -source file://database/migrations -database postgres://postgres:postgres@localhost:5433/postgres?sslmode=disable up 1
+      - migrate -path internal/database/migrations -database postgres://postgres:postgres@localhost:5433/slackclonedb?sslmode=disable up 1
   db:migrate:down:
     cmds:
-      - migrate -source file://database/migrations -database postgres://postgres:postgres@localhost:5433/postgres?sslmode=disable down 1
+      - migrate -path internal/database/migrations -database postgres://postgres:postgres@localhost:5433/slackclonedb?sslmode=disable down 1
   db:migrate:force:
     cmds:
-      - migrate -source file://database/migrations -database postgres://postgres:postgres@localhost:5433/postgres?sslmode=disable force {{.version}}
+      - migrate -path internal/database/migrations -database postgres://postgres:postgres@localhost:5433/slackclonedb?sslmode=disable force {{.version}}
   db:migrate:version:
     cmds:
-      - migrate -source file://database/migrations -database postgres://postgres:postgres@localhost:5433/postgres?sslmode=disable version
+      - migrate -path internal/database/migrations -database postgres://postgres:postgres@localhost:5433/slackclonedb?sslmode=disable version
+  db:migrate:goto:
+    cmds:
+      - migrate -path internal/database/migrations -database postgres://postgres:postgres@localhost:5433/slackclonedb?sslmode=disable goto {{.version}}
 
   sqlc:generate:
     cmds:
