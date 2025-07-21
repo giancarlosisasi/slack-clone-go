@@ -1,6 +1,7 @@
-package config
+package app
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -34,7 +35,7 @@ func NewConfig() *Config {
 	}
 
 	return &Config{
-		Port:         port,
+		Port:         fmt.Sprintf(":%s", port),
 		Version:      os.Getenv("APP_VERSION"),
 		AppEnv:       appEnv,
 		ReadTimeout:  15 * time.Second,
